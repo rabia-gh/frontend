@@ -1,0 +1,88 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+<div class="container-fluid">
+        
+                
+                        <h4 class="card-title mt-3 text-center">Create Account</h4>
+                        <p class="text-center">Get started with your free account</p>
+                        <p>
+                            <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-google"></i>   Login via Google</a>
+                            <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
+                        </p>
+                        <p class="divider-text">
+                                <span class="bg-light">OR</span>
+                            </p>
+
+                            <form #signUpForm='ngForm' (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+                                    <input type="text" #firstName="ngModel" [(ngModel)]="userService.selectedUser.firstName" name="firstName" placeholder="First name" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !firstName.valid}">
+                                    <div *ngIf="signUpForm.submitted && !firstName.valid">
+                                        <label class="validation-message">This field is required.</label>
+                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="text" #lastName="ngModel" [(ngModel)]="userService.selectedUser.lastName" name="lastName" placeholder="Last name" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !lastName.valid}">
+                                    <div *ngIf="signUpForm.submitted && !lastName.valid">
+                                        <label class="validation-message">This field is required.</label>
+                                    </div>
+                                    <input type="text" #email="ngModel" [(ngModel)]="userService.selectedUser.email" name="email" placeholder="Email" required [pattern]="emailRegex" [ngClass]="{'invalid-textbox' :signUpForm.submitted && !email.valid}">
+                                    <div *ngIf="signUpForm.submitted && email.errors">
+                                        <label *ngIf="email.errors.required" class="validation-message">This field is required</label>
+                                        <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address</label>
+                                
+                                
+                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                    <input type="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" name="password" placeholder="password" minlength="4" required [ngClass]="{'invalid-textbox':signUpForm.submitted && !password.valid}">
+                                    <div *ngIf="signUpForm.submitted && password.errors">
+                                        <label *ngIf="password.errors.required" class="validation-message">This field is required</label>
+                                        <label *ngIf="password.errors.minlength" class="validation-message">Enter at least characters.</label>
+                                
+                                    </div>
+                                    <br>
+
+
+                                    <label for="role">Select job role</label>
+                                    <select #role="ngModel" [(ngModel)]="userService.selectedUser.role" name="role" class="form-control">
+                                            <option>Expert</option>
+                                            <option>Client</option>
+                                    </select>
+
+
+                                    <label for="domaine">Select job domaine(ONLY Expert)</label>
+                                    <select #domaine="ngModel" [(ngModel)]="userService.selectedUser.domaine" name="domaine" area-placeholder="Select job domaine(ONLY Expert)" class="form-control">
+                                            <option>IOT</option>
+                                            <option>FINANCE</option>
+                                            <option>ECONOMIE</option>
+                                    </select><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    
+                                    <button class="btn btn-outline-success  my-2 my-sm-0" type="submit" value="Sign In">SignUp</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="/login" class="content-end">
+                                        <span class="sidebar-link-concept"> LogIn</span>
+                                      </a>
+                                     
+                                </form>
+                                
+                                
+                               
+      
+</div>
+
+
+
+<!-- Success message-->
+<div class="success" *ngIf="showSuccessMessage">
+    Saved successfully
+</div>
+<!--error message-->
+<div class="alert" *ngIf="serverErrorMessages">
+    {{serverErrorMessages}}
+</div>

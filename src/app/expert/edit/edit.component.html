@@ -1,0 +1,43 @@
+<p>fix disponibility day  :</p>
+<div class="col-sm-12">
+        <input id="typeahead-format" type="date" class="form-control" placeholder="CHOSE_OTHER_DAY" [(ngModel)]="expert.dispo_day" style="width: 250px" />
+</div>
+<br>
+
+<div class="row">
+    <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                        <label for="typeahead-format">from:</label>
+
+                    <input id="typeahead-format" type="time" class="form-control" placeholder="Heure" [(ngModel)]="expert.heure_dep" style="width: 100px" />
+                </div>
+                <div class="col-sm-6">
+                        <label for="typeahead-format">To:</label>
+
+                    <input id="typeahead-format" type="time" class="form-control" placeholder="Minute" [(ngModel)]="expert.heure_ter" style="width:100px ; margin-left:0px"  />
+                </div>
+            </div>
+</div>
+
+</div>
+
+<br>
+
+<button class="btn btn-outline-success  my-2 my-sm-0" type="submit" (click)="save()">Save</button>
+
+
+
+<h1>days already fixed :</h1>
+<div *ngFor="let date of data1 ; let in=index" >
+    <div class="row ">
+        <div class="col-sm-2">
+               <button (click)="edit(date)"><a [routerLink]="['/editExpert', data4[in]]"> <i class="fa fa-wrench" style="color:green"></i> </a> </button> 
+               
+               <button  (click)="delete(date)"><i class="fa fa-trash-alt" style="color:red"></i></button>
+            </div>
+            <div class="col-sm-6"> 
+                <p>{{date}} : from {{data2[in]}} to  {{data3[in]}} </p>
+            </div> 
+    </div> 
+</div>
